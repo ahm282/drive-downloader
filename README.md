@@ -1,7 +1,7 @@
 # GDrive Downloader
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-![Google Drive API](https://img.shields.io/badge/Google%20Drive%20API-4285F)](https://developers.googlge.com/drive/api/v3/quickstart/python)
+![Google Drive API](https://img.shields.io/badge/Google%20Drive%20API-4285F)
 ![GitHub license](https://img.shields.io/github/license/ahm282/gdrive-downloader)
 
 **Status: Work in Progress (WIP)**
@@ -40,7 +40,7 @@ Ensure you have the following installed:
 5. Add the folder ID of the Google Drive folder you want to download from in the `.env` file:
 
    ```python
-   FOLDER_ID= <folder_id>
+   FOLDER_ID= "<folder_id>"
    ```  
 6. Add the path to the folder where you want to download the files to in the `main.py` file:
 
