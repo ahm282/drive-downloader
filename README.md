@@ -47,10 +47,9 @@ Ensure you have the following installed:
    ```python
    dest_folder= "download path"
    ```
-the script will look for the Downloads folder in your home directory by default.
-but because the script is not yet able to handle localizations, sometimes you'll have to provide a different path.
+   the script will look for the Downloads folder in your home directory by default. The script is not yet able to handle localizations, sometimes you'll have to provide a different path.
 
-6. Run the script:
+7. Run the script:
 
    ```bash
    python main.py
