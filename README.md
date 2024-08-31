@@ -1,8 +1,8 @@
 # GDrive Downloader
 
-[![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)]
-[![Google Drive API](https://img.shields.io/badge/Google%20Drive%20API-4285F)](https://developers.google.com/drive/api/v3/quickstart/python)
-[![GitHub license](https://img.shields.io/github/license/ahm282/gdrive-downloader)]
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Google Drive API](https://img.shields.io/badge/Google%20Drive%20API-4285F)](https://developers.googlge.com/drive/api/v3/quickstart/python)
+![GitHub license](https://img.shields.io/github/license/ahm282/gdrive-downloader)
 
 **Status: Work in Progress (WIP)**
 
