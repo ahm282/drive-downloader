@@ -13,6 +13,9 @@ def main():
     # User can set the destination folder to a custom path.
     dest_folder = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Downloads')
 
+    # Custom path
+    # dest_folder = 'C:\\Users\\user\\Downloads'
+
     # Load environment variables from .env file
     load_dotenv()
 
