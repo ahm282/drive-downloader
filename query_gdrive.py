@@ -1,42 +1,71 @@
+from os import getenv
+from googleapiclient.errors import HttpError
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
 def query_folder(service, folder_id):
-    # FIXME: Implement error handling
+    logger.info(f"Querying folder with ID: {folder_id}")
+
     # Get the folder's metadata to retrieve its name
-    folder_metadata = (
-        service.files()
-        .get(
-            fileId=folder_id,
-            fields="name",
-            supportsAllDrives=True,
+    try:
+        folder_metadata = (
+            service.files()
+            .get(
+                fileId=folder_id,
+                fields="name",
+                supportsAllDrives=True,
+            )
+            .execute()
         )
-        .execute()
-    )
-    folder_name = folder_metadata["name"]
+        folder_name = folder_metadata["name"]
 
-    query = f"'{folder_id}' in parents"
-    results = (
-        service.files()
-        .list(
-            q=query,
-            orderBy="name",
-            includeItemsFromAllDrives=True,
-            supportsAllDrives=True,
-            fields="files(id, name, mimeType, parents)",
+        logger.info(f"Folder name retrieved: {folder_name}")
+
+        query = f"'{folder_id}' in parents"
+        order_by = getenv("ORDER_BY")
+        results = (
+            service.files()
+            .list(
+                q=query,
+                orderBy=order_by,
+                includeItemsFromAllDrives=True,
+                supportsAllDrives=True,
+                fields="files(id, name, mimeType, parents)",
+            )
+            .execute()
         )
-        .execute()
-    )
 
-    # Add folder name to results
-    results["folder_name"] = folder_name
+        logger.info(f"Results retrieved with {len(results.get('files', []))} items")
 
-    return results
+        # Add folder name to results
+        results["folder_name"] = folder_name
+
+        return results
+
+    except HttpError as error:
+        logger.error(f"HttpError: {error.resp.status} {error._get_reason()}")
+        return None
+    except Exception as e:
+        logger.error(f"An unexpected error occurred: {e}")
+        return None
 
 
 def query_file_metadata(service, file_id):
-    # FIXME: Implement error handling
-    file_metadata = (
-        service.files()
-        .get(fileId=file_id, fields="name, size, mimeType", supportsAllDrives=True)
-        .execute()
-    )
+    try:
+        file_metadata = (
+            service.files()
+            .get(fileId=file_id, fields="name, size, mimeType", supportsAllDrives=True)
+            .execute()
+        )
+        return file_metadata
 
-    return file_metadata
+    except HttpError as error:
+        logger.error(f"HttpError: {error.resp.status} {error._get_reason()}")
+        return None
+    except Exception as e:
+        logger.error(f"An unexpected error occurred: {e}")
+        return None
