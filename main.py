@@ -16,11 +16,20 @@ def main():
 
     try:
         if platform in ["linux", "darwin"]:
-            dest_folder = os.path.join(os.path.join(os.environ["HOME"]), "Downloads")
+            base_download_dir = os.environ["HOME"]
         elif platform in ["win32", "cygwin"]:
-            dest_folder = os.path.join(
-                os.path.join(os.environ["USERPROFILE"]), "Downloads"
-            )
+            base_download_dir = os.environ["USERPROFILE"]
+        else:
+            raise ValueError("Unsupported platform")
+
+        # Define the destination folder
+        base_download_dir = os.path.join(base_download_dir, "Downloads")
+
+        # Create the "GDrive Downloads" folder inside the Downloads directory
+        download_files.create_download_folder(base_download_dir, "GDrive Downloads")
+
+        # Move into "GDrive Downloads" directory
+        dest_folder = os.path.join(base_download_dir, "GDrive Downloads")
 
     except (KeyError, OSError) as e:
         print(f"Error: {e}")
